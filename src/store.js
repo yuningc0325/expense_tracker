@@ -19,6 +19,7 @@ const getters ={
 };
 
 const mutations={
+  // tell if there are authenticated and user data
   [types.SET_AUTHENTICATED](state,isAuthenticated){
     if(isAuthenticated) state.isAuthenticated=isAuthenticated;
     else state.isAuthenticated=false;
@@ -30,17 +31,16 @@ const mutations={
 };
 
 const actions={
-  setAuthenticated:({commit},isAuthenticated)=>{
-    commit(types.SET_AUTHENTICATED,isAuthenticated);
+  setAuthenticated(context,isAuthenticated){
+    context.commit(types.SET_AUTHENTICATED,isAuthenticated);
   },
-  setUser:({commit},user)=>{
-    commit(type.SET_USER,user);
+  setUser(context,user){
+    context.commit(types.SET_USER,user);
   }
+ 
 };
 
-
 export default new Vuex.Store({
-  types,
   state,
   getters,
   mutations,
