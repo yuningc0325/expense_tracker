@@ -5,7 +5,7 @@ import Router from 'vue-router'
 import Register from './views/register.vue'
 import notFound from './views/404.vue'
 import Login from './views/login'
-import index from './views/index.vue'
+import Index from './views/Index.vue'
 
 Vue.use(Router);
 
@@ -16,7 +16,7 @@ const router = new Router({
     {
       path:'/index',
       name:'index',
-      componemt:index
+      component:Index
     },
     {
       path:'/register',

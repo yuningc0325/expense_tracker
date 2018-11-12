@@ -96,7 +96,7 @@ export default {
     margin: 100px auto;
     padding: 15px;
     text-align: center;
-    border: 1px solid #ebebeb;
+    border: 1px solid #4a4a4a;
     border-radius: 3px;
     transition: .2s;
 }
