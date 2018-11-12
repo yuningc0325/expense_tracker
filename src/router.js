@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import app from './App.vue'
+// import app from './App.vue'
+
 import Register from './views/register.vue'
 import notFound from './views/404.vue'
 import Login from './views/login'
+import index from './views/index.vue'
 
 Vue.use(Router);
 
@@ -12,9 +14,9 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path:'/',
-      name:'home',
-      componemt:app
+      path:'/index',
+      name:'index',
+      componemt:index
     },
     {
       path:'/register',

@@ -67,7 +67,7 @@ export default {
                         this.$store.dispatch('setAuthenticated',!this.isEmpty(decode));
                         this.$store.dispatch('setUser',decode);
                         // After registeration is successful, then page redirects to login. 
-                        this.$router.push('/');
+                        this.$router.push('/index');
                     })
                 } else {
                     this.$message.error('failed');
