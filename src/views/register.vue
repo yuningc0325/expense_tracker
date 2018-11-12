@@ -1,6 +1,6 @@
 <template>
     <div class="register-container">
-        <h3>Expense Tracking</h3>
+        <h3>Sign Up</h3>
         <div class="form-container">
             <el-form :model="registerUser" status-icon :rules="rules" ref="registerForm" 
             label-width="100px" class="registerForm">
@@ -25,6 +25,9 @@
             <el-form-item>
                 <el-button type="primary" class="submit_btn" @click="submitForm('registerForm')">SignUp</el-button>
             </el-form-item>
+            <div class="hint">
+            <a href="/login">log in here</a>
+            </div>
             </el-form>
         </div>
     </div>
@@ -92,15 +95,18 @@ export default {
                     .then(response=>{
                         this.$message({
                             message:'success',
-                            type:'error'
+                            type:'success'
                         }
                         )
                     })
+                // After registeration is successful, then page redirects to login. 
+                this.$router.push('/login');
                 } else {
+                    this.$message.error('failed');
                     console.log('error submit!!');
                     return false;
                 }
-                this.$router.push('/login');
+                
             });
         }
     }
@@ -132,6 +138,9 @@ h3{
 .submit_btn,.drop-menu{
     width:100%;
 }
-
+.hint{
+    font-size: 0.9em;
+    text-align: right;
+}
 
 </style>
