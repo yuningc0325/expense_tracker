@@ -8,16 +8,16 @@
                 <div class="userInfo">
                     <img src="uesr.avatar" class="avatar" alt="">
                     <div class="welcome">
-                        <p class="name avatarname">Mr. Chang</p>
+                        <p class="name avatarname">{{user.name}}</p>
                     </div>
                 <span class="username">
                     <!-- drop down menu -->
-                    <el-dropdown trigger="click">
+                    <el-dropdown trigger="click" @command="setDialogInfo">
                             <span class="el-dropdown-link">
                                 <i class="el-icon-caret-bottom el-icon--right"></i>
                             </span>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item command='info'>personal data</el-dropdown-item>
+                                <el-dropdown-item command='info'>Info</el-dropdown-item>
                                 <el-dropdown-item  command='logout'>log out</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
@@ -32,8 +32,35 @@
 <script>
 export default {
     name:'navbar',
+    computed:{
+        user(){
+            return this.$store.getters.user;
+        }
+    },
+    methods:{
+        setDialogInfo(cmd){
+            switch(cmd){
+                case "info": this.showInfoList();
+                break;
+                case "logout": this.logout();
+                break;
+            }
+        },
+        showInfoList(){
+            this.$router.push('index/info')
+        },
+        logout(){
+             // clean token
+             localStorage.removeItem('eletoken');
+             // set vuex
+             this.$store.dispatch('clearUserStatus');
+             this.$router.push('/login');
+        }
+
+    },
     components:{}
 }
+
 </script>
 
 <style scoped>

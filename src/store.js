@@ -28,6 +28,7 @@ const mutations={
     if(user) state.user = user;
     else state.user={};
   }
+
 };
 
 const actions={
@@ -36,6 +37,10 @@ const actions={
   },
   setUser(context,user){
     context.commit(types.SET_USER,user);
+  },
+  clearUserStatus(context){
+    context.commit(types.SET_AUTHENTICATED,false);
+    context.commit(types.SET_USER,null);
   }
  
 };

@@ -6,6 +6,8 @@ import Register from './views/register.vue'
 import notFound from './views/404.vue'
 import Login from './views/login'
 import Index from './views/Index.vue'
+import Info from './views/info.vue'
+
 
 Vue.use(Router);
 
@@ -14,9 +16,21 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path:'/',
+      name:'home',
+      component:Index,
+    },
+    {
+      path:'/home',
+      name:'home',
+      component:Index,
+    },
+    {
       path:'/index',
       name:'index',
-      component:Index
+      component:Index,
+      children:[
+        {path:'info',name:'info',component:Info}]
     },
     {
       path:'/register',
