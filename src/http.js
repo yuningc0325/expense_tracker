@@ -38,10 +38,9 @@ axios.interceptors.response.use(response=>{
 },error=>{
     endLoading();
     Message.error(error.response.data);
-
     // Get the error status (process token expiration)
-    const {errStatus}= error.response;
-    if(errStatus==401){
+    const {status}= error.response;
+    if(status==401){
         Message.error('token expire, please login again');
         // clean token
         localStorage.removeItem('eletoken');

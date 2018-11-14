@@ -42,7 +42,7 @@ export default {
           icon: "fa-money",
           name: "Finance",
           path: "fund",
-          children: [{ path: "foundlist", name: "Expense" }]
+          children: [{ path: "expense", name: "Expense" }]
         },
         {
           icon: "fa-asterisk",

@@ -7,6 +7,7 @@ import notFound from './views/404.vue'
 import Login from './views/login'
 import Index from './views/Index.vue'
 import Info from './views/info.vue'
+import Expense from './views/expenseList.vue'
 
 
 Vue.use(Router);
@@ -30,7 +31,9 @@ const router = new Router({
       name:'index',
       component:Index,
       children:[
-        {path:'/info',name:'info',component:Info}]
+        {path:'/info',name:'info',component:Info},
+        {path:'/expense',name:'expense',component:Expense},
+      ]
     },
     {
       path:'/register',

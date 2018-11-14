@@ -40,11 +40,8 @@ export default {
             this.$axios.put('/api/users/'+this.formLabelAlign.id,this.formLabelAlign)
             .then(
                 response=>{
-                    console.log(localStorage.getItem('eletoken'));
-                        
                     const currentToken =jwt_decode(localStorage.getItem('eletoken'));
                     currentToken.name=this.formLabelAlign.name;
-                    console.log(currentToken);
                     this.$store.dispatch('setUser',currentToken);
                     // After registeration is successful, then page redirects to login. 
                     // this.$router.push('/index');
