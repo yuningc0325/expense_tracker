@@ -1,5 +1,5 @@
 <template>
-    <el-row>
+    <el-row class="menu-container">
          <el-col>
              <el-menu
                 mode="vertical"
@@ -48,7 +48,7 @@ export default {
           icon: "fa-asterisk",
           name: "Setting",
           path: "info",
-          children: [{ path: "infoshow", name: "Account" }]
+          children: [{ path: "info", name: "Account" }]
         }
       ]
     };
@@ -56,6 +56,15 @@ export default {
 };
 </script>
 <style scoped>
+.menu-container{
+  position: absolute;
+  top: 71px;
+  left: 0;
+  min-height: 100%;
+  background-color: #545c64;
+  z-index: 99;
+
+}
 
 .el-menu {
   border: none;
