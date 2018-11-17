@@ -1,8 +1,10 @@
 <template>
-<div>
+<div class="index">
     <navbar></navbar>
     <leftmenu></leftmenu>
+    <div class="layout">
     <router-view></router-view>
+    </div>
 </div>
 
 </template>
@@ -18,5 +20,16 @@ export default {
 
 
 <style scoped>
-
+.index{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.layout{
+  position: absolute;  
+  top: 71px;
+  left: 180px;
+  width: calc(100% - 180px);
+  height: calc(100% - 71px);
+}
 </style>

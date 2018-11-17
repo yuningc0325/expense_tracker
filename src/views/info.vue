@@ -63,11 +63,8 @@ export default {
 <style scoped>
 
 .row-bg{
-    position: absolute;
-    top:71px;
-    left: 180px;
-    width: 700px;
-    padding: 50px 100px;
+    height: 100%;
+    padding: 70px 100px;
 }
 
 </style>

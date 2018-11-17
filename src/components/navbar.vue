@@ -65,7 +65,7 @@ export default {
 
 <style scoped>
 .head-nav{
-    position: absolute;
+    position: fixed;
     left: 0px;
     top: 0px;
     width:100%;
@@ -76,6 +76,7 @@ export default {
     color:white;
     border-bottom: 1px solid #1f2d3d;
     font-family: sans-serif;
+    z-index: 99;
 }
 
 .title {

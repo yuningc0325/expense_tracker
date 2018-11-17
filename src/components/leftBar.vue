@@ -57,13 +57,12 @@ export default {
 </script>
 <style scoped>
 .menu-container{
-  position: absolute;
+  position: fixed;
   top: 71px;
   left: 0;
   min-height: 100%;
   background-color: #545c64;
   z-index: 99;
-
 }
 
 .el-menu {
