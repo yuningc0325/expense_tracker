@@ -11,6 +11,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI,{locale});
 Vue.prototype.$axios=axios;
 
+
 new Vue({
   router,
   store,

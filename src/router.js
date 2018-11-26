@@ -8,6 +8,10 @@ import Login from './views/login'
 import Index from './views/Index.vue'
 import Info from './views/info.vue'
 import Expense from './views/expenseList.vue'
+// For development
+import Test from './views/test.vue'
+import UItest from './views/UItest.vue'
+
 
 
 Vue.use(Router);
@@ -33,6 +37,7 @@ const router = new Router({
       children:[
         {path:'/info',name:'info',component:Info},
         {path:'/expense',name:'expense',component:Expense},
+        {path:'/uitest',name:'uitest',component:UItest}
       ]
     },
     {
@@ -49,6 +54,11 @@ const router = new Router({
       path:'*',
       name:'404',
       component:notFound
+    },
+    {
+      path:'/test',
+      name:'test',
+      component:Test
     }
   ]
 })

@@ -2,7 +2,7 @@
     <header class="head-nav">
         <el-row>
             <el-col :span="12">
-                <span class="title">Expense Track</span>
+                <span class="title">Expense Tracker</span>
             </el-col>
             <el-col :span="12" class="profile">
                 <div class="userInfo">

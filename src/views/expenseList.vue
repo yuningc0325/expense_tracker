@@ -3,16 +3,17 @@
 <div class="expense-container">
     <div>
         <el-form :inline="true" ref="addData">
-            <!-- <el-date-picker
-                v-model="value1"
-                type="date"
-                placeholder="选择日期">
-            </el-date-picker>
-            <el-date-picker
-                v-model="value2"
-                type="date"
-                placeholder="选择日期">
-            </el-date-picker> -->
+                <el-date-picker
+                    class="timeFilter"
+                    v-model="timeSelect"
+                    type="daterange"
+                    start-placeholder="Start"
+                    end-placeholder="End"
+                    :default-time="['00:00:00', '23:59:59']">
+                </el-date-picker>
+            <el-button class="filterBtn" type="primary" size="small" @click="timeFilter()">
+                    Filter
+            </el-button>
             <el-form-item class="addBtn">
                 <el-button type="primary" size="small" @click="addNewCol()">
                     Create
@@ -26,7 +27,6 @@
         </el-form>
     </div>
     <el-table
-    v-if="tableData.length>0"
     :data="tableData"
     border
     style="width: 100%;">
@@ -125,6 +125,7 @@ export default {
         return {
             tableData:[],
             allTableData:[],
+            timeFilterTableData:[],
             dialog:{
                 show:false,
                 option:"edit",
@@ -139,6 +140,7 @@ export default {
                 payer:'',
                 payMethod:''
             },
+            timeSelect:{},
             paginations:{
                 page_index:1, // current page
                 total:0, // total page
@@ -156,8 +158,10 @@ export default {
             this.$axios.get('api/profiles/')
             .then(res=>{
                 this.allTableData=res.data;
+                this.timeFilterTableData=res.data;
                 // the new is the top
                 this.allTableData.reverse();
+                this.timeFilterTableData.reverse();
                 // set paginations
                 this.setPaginations();
             }).catch(err=>{
@@ -254,6 +258,26 @@ export default {
                 }
                 this.tableData=tables;
             }
+        },
+        timeFilter(){
+            // In empty value condition
+            if(!this.timeSelect[0] || !this.timeSelect[1]) {
+                this.$message({
+                    message:"please define date period",
+                    type:'warning',
+                    duration:1500
+                })
+                this.getProfile();
+                return;
+            }
+            // filter the tabledata
+            const startTime = this.timeSelect[0].getTime();
+            const endTime =this.timeSelect[1].getTime();
+            this.allTableData = this.timeFilterTableData.filter(item=>{
+                const filterDate = new Date(item.date).getTime();
+                return  endTime>= filterDate && filterDate>=startTime
+            })
+            this.setPaginations();
         }
     }
 }
@@ -272,6 +296,12 @@ export default {
 }
 .addBtn,.deletBtn{
     float: right;
+}
+.timeFilter{
+    margin-left: 20px;
+}
+.filterBtn{
+    margin-left: 20px;
 }
 .rickPay{
     color:rgb(59, 138, 206);
