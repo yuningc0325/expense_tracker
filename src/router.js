@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import app from './App.vue'
-
 import Register from './views/register.vue'
 import notFound from './views/404.vue'
 import Login from './views/login'

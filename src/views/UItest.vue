@@ -3,6 +3,7 @@
     <div>
         <el-button @click="dialog.show=true">Add New sheet</el-button>
         <el-button @click="addNewRow">Add New sheet</el-button>
+        <el-button @click="editRow">Edit</el-button>
     </div>
     <div>
         <table id="grid"></table>
@@ -95,17 +96,24 @@ export default {
     components:{Datepop},
     data(){
         return {
+            lastsel:'',
+            rowIdCount:'',
             tableData:[],
             tableDataToGrid:[],
             tableCol:[
-                {name:"date",label:"Date"},
-                {name:"category",label:"Type"},
-                {name:"location",label:"Location"},
-                {name:"item",label:"Item"},
-                {name:"price",label:"Price"},
-                {name:"currency",label:"Currency"},
-                {name:"payer",label:"Payer"},
-                {name:"payMethod",label:"PayMethod"},
+                {name:'id',width:70,editable:false},
+                {name:"date",label:"Date",width:180,editable:true},
+                {name:"category",label:"Type",width:70,editable:true,edittype:"select",
+                    editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
+                {name:"location",label:"Location",width:150,editable:true},
+                {name:"item",label:"Item",width:250,editable:true},
+                {name:"price",label:"Price",width:60,editable:true},
+                {name:"currency",label:"Currency",width:80,editable:true,edittype:"select",
+                    editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
+                {name:"payer",label:"Payer",width:50,editable:true,edittype:"select",
+                    editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
+                {name:"payMethod",label:"Method",width:80,editable:true,edittype:"select",
+                    editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
             ],
             dialog:{
                 show:false,
@@ -128,26 +136,57 @@ export default {
     methods:{
         getProfile(){
             // Deploy data
-            this.$axios.get('api/profiles/')
-            .then(res=>{
-               this.tableData=res.data;
+            // this.$axios.get('api/profiles/')
+            // .then(res=>{
+            //    this.tableData=res.data;
                // Deploy grid
                 $(()=>{
                     $("#grid").jqGrid({
+                    url:"api/profileTest/",
+                    datatype:"json",
                     colModel:this.tableCol,
-                    data:this.tableData
+                    onSelectRow: function(id){
+                        if(id && id!==this.lastsel){
+                            $('#grid').jqGrid('restoreRow',this.lastsel);
+                            var editparameters={
+                                "keys":true,
+                                "url":"api/profiles",
+                                "mtype":"POST",
+                            }
+                            $('#grid').jqGrid('editRow',id,editparameters);
+                            this.lastsel=id;
+                        }
+                    },
+                    // data:this.tableData,
+                    viewrecords:true,
+                    
+                    
                 })
             })
-            }).catch(err=>{
-                console.log(err);
-            })
+            // }).catch(err=>{
+            //     console.log(err);
+            // })
         },
         addNewRow(){
-            this.tableData.push(Object);
+            
+            var p ={
+                rowID : '3',
+                initdata : {},
+                position :"first",
+                useDefValues : false,
+                useFormatter : false,
+                addRowParams : {extraparam:{}}
+            }
+
+            $("#grid").jqGrid('addRow',p);
         },
         removeOne(){
             this.tableData.pop(Object);
         },
+        editRow(){
+            
+            // $("#grid").jqGrid('editRow',this.rowIdCount);
+        }
 
     }
 }
